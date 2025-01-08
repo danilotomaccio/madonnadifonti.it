@@ -42,37 +42,52 @@ html{font-family:system-ui,sans-serif;scroll-behavior:smooth}html,body{margin:0}
 	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
 	animation-fill-mode: both;
 	animation-name: astroFadeIn; }</style></head> <body> <header id="header" data-astro-cid-hnhh3bfe> <div class="header-content" data-astro-cid-hnhh3bfe> <div class="logo" data-astro-cid-hnhh3bfe> <a href="/" data-astro-cid-hnhh3bfe> <img src="/_astro/logo-extended.DdMplc16_1UQgzK.svg" alt="logo casaedile" width="145" height="38" loading="lazy" decoding="async"> </a> </div> <nav class="services" data-astro-cid-hnhh3bfe> <a href="/services/imbiancatura-tinteggiatura" data-astro-cid-hnhh3bfe>Imbiancatura</a><a href="/services/traslochi" data-astro-cid-hnhh3bfe>Traslochi</a><a href="/services/montaggio" data-astro-cid-hnhh3bfe>Montaggio</a><a href="/services/servizi-professionali" data-astro-cid-hnhh3bfe>Servizi professionali</a> </nav> <div class="call-to-action" data-astro-cid-hnhh3bfe> <a href="/contacts" data-astro-cid-hnhh3bfe> <button class="btn" data-astro-cid-hnhh3bfe> <span data-astro-cid-hnhh3bfe> Contattaci </span> </button> </a> </div> <button class="menu-button" id="menuButton" data-astro-cid-hnhh3bfe> &#9776; </button> </div> </header> <div class="drawer" id="drawer" data-astro-cid-hnhh3bfe> <div id="drawer-content" data-astro-cid-hnhh3bfe> <div id="drawer-header" data-astro-cid-hnhh3bfe> <button id="close-menu-button" data-astro-cid-hnhh3bfe> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368" data-astro-cid-hnhh3bfe><path d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z" data-astro-cid-hnhh3bfe></path></svg> </button> </div> <div id="drawer-menu" data-astro-cid-hnhh3bfe> <nav class="services" data-astro-cid-hnhh3bfe> <a href="/services/imbiancatura-tinteggiatura" data-astro-cid-hnhh3bfe> <span data-astro-cid-hnhh3bfe> Imbiancatura </span> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368"> <path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path> </svg> </a><a href="/services/traslochi" data-astro-cid-hnhh3bfe> <span data-astro-cid-hnhh3bfe> Traslochi </span> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368"> <path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path> </svg> </a><a href="/services/montaggio" data-astro-cid-hnhh3bfe> <span data-astro-cid-hnhh3bfe> Montaggio </span> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368"> <path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path> </svg> </a><a href="/services/servizi-professionali" data-astro-cid-hnhh3bfe> <span data-astro-cid-hnhh3bfe> Servizi professionali </span> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368"> <path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path> </svg> </a> </nav> <div class="call-to-action" data-astro-cid-hnhh3bfe> <div class="btn" data-astro-cid-6ygtcg62 style="--textColor: black;--bgColor: #0000000d;"> <a href="/contacts" data-astro-cid-6ygtcg62 style="--textColor: black;--bgColor: #0000000d;"> Contattaci </a> </div>  </div> </div> </div> </div> <script>
-  let lastScrollY = window.scrollY;
-  const header = document.getElementById("header");
-  const menuButton = document.getElementById("menuButton");
-  const closeMenuButton = document.getElementById("close-menu-button");
-  const drawer = document.getElementById("drawer");
 
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > lastScrollY) {
-      header.classList.add("header-hidden");
-    } else {
-      header.classList.remove("header-hidden");
-    }
-
-    if (window.scrollY > 0) {
-      header.classList.add("scrolled");
-    } else {
-      header.classList.remove("scrolled");
-    }
-
-    lastScrollY = window.scrollY;
+  document.addEventListener("DOMContentLoaded", () => {
+    initHeader();
   });
 
-  function toggleDrawer() {
-    drawer.classList.toggle("active");
+  document.addEventListener("astro:after-swap", () => {
+    initHeader();
+  });
 
-    document.body.style.overflow =
-      document.body.style.overflow === "hidden" ? "initial" : "hidden";
+  function initHeader() {
+    let lastScrollY = window.scrollY;
+    const header = document.getElementById("header");
+    const menuButton = document.getElementById("menuButton");
+    const closeMenuButton = document.getElementById("close-menu-button");
+    const drawer = document.getElementById("drawer");
+
+    function handleScroll() {
+      if (window.scrollY > lastScrollY) {
+        header.classList.add("header-hidden");
+      } else {
+        header.classList.remove("header-hidden");
+      }
+
+      if (window.scrollY > 0) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+
+      lastScrollY = window.scrollY;
+    }
+
+    window.addEventListener("scroll", () => {
+      handleScroll();
+    });
+
+    function toggleDrawer() {
+      drawer.classList.toggle("active");
+
+      document.body.style.overflow =
+        document.body.style.overflow === "hidden" ? "initial" : "hidden";
+    }
+
+    closeMenuButton.addEventListener("click", toggleDrawer);
+    menuButton.addEventListener("click", toggleDrawer);
   }
-
-  closeMenuButton.addEventListener("click", toggleDrawer);
-  menuButton.addEventListener("click", toggleDrawer);
 </script>  <div id="hero"> <div id="hero-content"> <h1>Ristrutturazioni, Manutenzione, Installazioni</h1> </div> <img src="/_astro/livella.C0pI7UQQ_2smf13.webp" alt="Servizi Professionali - Tecnico al lavoro" class="hero-img" data-astro-transition-scope="astro-ma67dsdk-1" width="6000" height="4000" loading="lazy" decoding="async"> </div> <div id="content-container">  <div class="alternate-layout"> <img src="/_astro/assembly-3.BeWENHLL_2q7S2q.webp" alt="image on the left" width="6000" height="4000" loading="lazy" decoding="async"><div class="paragraph"><h2 id="ristrutturazioni-chiavi-in-mano-a-milano-bergamo-e-lombardia">Ristrutturazioni chiavi in mano a Milano, Bergamo e Lombardia</h2><p>CasaEdile è il partner ideale per le ristrutturazioni complete di abitazioni, uffici e negozi in Lombardia. Offriamo soluzioni chiavi in mano a Milano, Bergamo e Monza, garantendo un servizio che copre ogni fase: dalla progettazione iniziale fino alla consegna finale. Ogni intervento è eseguito da professionisti esperti e qualificati, che lavorano con materiali di alta qualità per valorizzare e modernizzare gli spazi. Con CasaEdile, hai la certezza di rispettare i tempi concordati, senza rinunciare alla cura dei dettagli e alla precisione artigianale. Contattaci per trasformare la tua proprietà con un progetto su misura.</p></div><div class="paragraph"><h2 id="manutenzione-edile">Manutenzione Edile</h2><p>Mantieni il valore della tua proprietà con i servizi di manutenzione edile di CasaEdile. Offriamo interventi programmati e straordinari per preservare e migliorare l’integrità strutturale di edifici residenziali e commerciali. Che si tratti di piccoli interventi o di progetti più complessi, il nostro team opera con efficienza e rapidità per risolvere ogni problema. Dai rifacimenti di facciate alle riparazioni interne, lavoriamo per garantire sicurezza e durata nel tempo. Affidati alla nostra esperienza per una manutenzione puntuale e senza sorprese.</p></div><img src="/_astro/restauro.lLfR9zUQ_1g86VA.webp" alt="image on the left" width="5962" height="3975" loading="lazy" decoding="async"><img src="/_astro/assembly-2.CQXW2c_u_Z1u88ht.webp" alt="image on the left" width="6000" height="4000" loading="lazy" decoding="async"><div class="paragraph"><h3 id="servizi-professionali-per-casa-e-azienda-in-lombardia">Servizi Professionali per Casa e Azienda in Lombardia</h3><p>CasaEdile offre una gamma completa di servizi per privati e aziende, dalle installazioni agli interventi di ristrutturazione. Operiamo in tutta la Lombardia con soluzioni personalizzate che rispondono alle esigenze di ogni cliente. Dalla posa di impianti elettrici e idraulici, alla tinteggiatura e al rifacimento di interni, ogni lavoro è curato nei minimi dettagli da professionisti qualificati. Il nostro obiettivo è migliorare la funzionalità e l’estetica di ogni ambiente, garantendo risultati duraturi. Richiedi una consulenza e scopri come possiamo supportarti nel miglioramento della tua casa o del tuo spazio commerciale.</p></div> </div> 
 <div class="contact-layout" id="contactform"> <div class="contacts"> <!-- <div id="contact-bg">
       <div id="fg"></div>

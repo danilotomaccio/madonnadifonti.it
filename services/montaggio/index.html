@@ -42,37 +42,52 @@ html{font-family:system-ui,sans-serif;scroll-behavior:smooth}html,body{margin:0}
 	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
 	animation-fill-mode: both;
 	animation-name: astroFadeIn; }</style></head> <body> <header id="header" data-astro-cid-hnhh3bfe> <div class="header-content" data-astro-cid-hnhh3bfe> <div class="logo" data-astro-cid-hnhh3bfe> <a href="/" data-astro-cid-hnhh3bfe> <img src="/_astro/logo-extended.DdMplc16_1UQgzK.svg" alt="logo casaedile" width="145" height="38" loading="lazy" decoding="async"> </a> </div> <nav class="services" data-astro-cid-hnhh3bfe> <a href="/services/imbiancatura-tinteggiatura" data-astro-cid-hnhh3bfe>Imbiancatura</a><a href="/services/traslochi" data-astro-cid-hnhh3bfe>Traslochi</a><a href="/services/montaggio" data-astro-cid-hnhh3bfe>Montaggio</a><a href="/services/servizi-professionali" data-astro-cid-hnhh3bfe>Servizi professionali</a> </nav> <div class="call-to-action" data-astro-cid-hnhh3bfe> <a href="/contacts" data-astro-cid-hnhh3bfe> <button class="btn" data-astro-cid-hnhh3bfe> <span data-astro-cid-hnhh3bfe> Contattaci </span> </button> </a> </div> <button class="menu-button" id="menuButton" data-astro-cid-hnhh3bfe> &#9776; </button> </div> </header> <div class="drawer" id="drawer" data-astro-cid-hnhh3bfe> <div id="drawer-content" data-astro-cid-hnhh3bfe> <div id="drawer-header" data-astro-cid-hnhh3bfe> <button id="close-menu-button" data-astro-cid-hnhh3bfe> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368" data-astro-cid-hnhh3bfe><path d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z" data-astro-cid-hnhh3bfe></path></svg> </button> </div> <div id="drawer-menu" data-astro-cid-hnhh3bfe> <nav class="services" data-astro-cid-hnhh3bfe> <a href="/services/imbiancatura-tinteggiatura" data-astro-cid-hnhh3bfe> <span data-astro-cid-hnhh3bfe> Imbiancatura </span> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368"> <path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path> </svg> </a><a href="/services/traslochi" data-astro-cid-hnhh3bfe> <span data-astro-cid-hnhh3bfe> Traslochi </span> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368"> <path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path> </svg> </a><a href="/services/montaggio" data-astro-cid-hnhh3bfe> <span data-astro-cid-hnhh3bfe> Montaggio </span> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368"> <path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path> </svg> </a><a href="/services/servizi-professionali" data-astro-cid-hnhh3bfe> <span data-astro-cid-hnhh3bfe> Servizi professionali </span> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368"> <path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path> </svg> </a> </nav> <div class="call-to-action" data-astro-cid-hnhh3bfe> <div class="btn" data-astro-cid-6ygtcg62 style="--textColor: black;--bgColor: #0000000d;"> <a href="/contacts" data-astro-cid-6ygtcg62 style="--textColor: black;--bgColor: #0000000d;"> Contattaci </a> </div>  </div> </div> </div> </div> <script>
-  let lastScrollY = window.scrollY;
-  const header = document.getElementById("header");
-  const menuButton = document.getElementById("menuButton");
-  const closeMenuButton = document.getElementById("close-menu-button");
-  const drawer = document.getElementById("drawer");
 
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > lastScrollY) {
-      header.classList.add("header-hidden");
-    } else {
-      header.classList.remove("header-hidden");
-    }
-
-    if (window.scrollY > 0) {
-      header.classList.add("scrolled");
-    } else {
-      header.classList.remove("scrolled");
-    }
-
-    lastScrollY = window.scrollY;
+  document.addEventListener("DOMContentLoaded", () => {
+    initHeader();
   });
 
-  function toggleDrawer() {
-    drawer.classList.toggle("active");
+  document.addEventListener("astro:after-swap", () => {
+    initHeader();
+  });
 
-    document.body.style.overflow =
-      document.body.style.overflow === "hidden" ? "initial" : "hidden";
+  function initHeader() {
+    let lastScrollY = window.scrollY;
+    const header = document.getElementById("header");
+    const menuButton = document.getElementById("menuButton");
+    const closeMenuButton = document.getElementById("close-menu-button");
+    const drawer = document.getElementById("drawer");
+
+    function handleScroll() {
+      if (window.scrollY > lastScrollY) {
+        header.classList.add("header-hidden");
+      } else {
+        header.classList.remove("header-hidden");
+      }
+
+      if (window.scrollY > 0) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+
+      lastScrollY = window.scrollY;
+    }
+
+    window.addEventListener("scroll", () => {
+      handleScroll();
+    });
+
+    function toggleDrawer() {
+      drawer.classList.toggle("active");
+
+      document.body.style.overflow =
+        document.body.style.overflow === "hidden" ? "initial" : "hidden";
+    }
+
+    closeMenuButton.addEventListener("click", toggleDrawer);
+    menuButton.addEventListener("click", toggleDrawer);
   }
-
-  closeMenuButton.addEventListener("click", toggleDrawer);
-  menuButton.addEventListener("click", toggleDrawer);
 </script>  <div id="hero"> <div id="hero-content"> <h1>Montaggio Porte, Cucine e Infissi</h1> </div> <img src="/_astro/assembly-2.CQXW2c_u_Z1u88ht.webp" alt="Montaggio Professionale - Tecnico al lavoro" class="hero-img" data-astro-transition-scope="astro-ma67dsdk-1" width="6000" height="4000" loading="lazy" decoding="async"> </div> <div id="content-container">  <div class="alternate-layout"> <img src="/_astro/assembly-1.sXevk3mE_Z153Odm.webp" alt="image on the left" width="6000" height="4000" loading="lazy" decoding="async"><div class="paragraph"><h2 id="montaggio-professionale-di-porte-cucine-e-infissi">Montaggio professionale di porte, cucine e infissi</h2><p>Cerchi un servizio di montaggio porte, cucine e infissi a Milano, Bergamo, Monza e in tutta la Lombardia? I nostri tecnici qualificati offrono installazioni rapide e precise, utilizzando solo materiali di alta qualità. Che si tratti di una nuova cucina, di porte interne o di infissi per la tua casa, garantiamo un lavoro curato nei minimi dettagli.
 Contattaci oggi per un preventivo su misura e scopri come possiamo migliorare i tuoi spazi con il nostro servizio di montaggio.</p></div><div class="paragraph"><h2 id="installazione-professionale-a-milano-bergamo-monza-e-lombardia">Installazione professionale a Milano, Bergamo, Monza e Lombardia</h2><p>CasaEdile è il punto di riferimento per il montaggio professionale in Lombardia. Offriamo installazioni su misura per porte, cucine e infissi, garantendo interventi rapidi e precisi a Milano, Bergamo e Monza. Il nostro team di tecnici qualificati utilizza attrezzature all’avanguardia e materiali di prima scelta per assicurare risultati duraturi e funzionali. Che si tratti di un’abitazione privata o di un’azienda, personalizziamo ogni installazione in base alle esigenze del cliente. Affidati a CasaEdile per un servizio di qualità che valorizza i tuoi spazi e aumenta il comfort quotidiano.</p></div><img src="/_astro/assembly-2.CQXW2c_u_Z1u88ht.webp" alt="image on the left" width="6000" height="4000" loading="lazy" decoding="async"><img src="/_astro/assembly-3.BeWENHLL_2q7S2q.webp" alt="image on the left" width="6000" height="4000" loading="lazy" decoding="async"><div class="paragraph"><h3 id="montaggi-e-installazioni-consulenze-gratuite">Montaggi e Installazioni: consulenze gratuite</h3><p>Ogni installazione richiede attenzione e competenza, e il nostro obiettivo è offrire soluzioni su misura per ogni progetto. Dalla posa di porte e infissi fino all’assemblaggio di cucine, CasaEdile opera con precisione artigianale, rispettando i tempi di consegna e garantendo un risultato finale impeccabile. I nostri esperti sono disponibili per sopralluoghi e consulenze gratuite, per consigliarti le soluzioni migliori per la tua casa o il tuo ufficio. Con CasaEdile, ogni dettaglio conta: scegli l’eccellenza del montaggio professionale per trasformare e migliorare i tuoi ambienti.</p></div> </div> 
 <div class="contact-layout" id="contactform"> <div class="contacts"> <!-- <div id="contact-bg">

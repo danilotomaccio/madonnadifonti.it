@@ -42,37 +42,52 @@ html{font-family:system-ui,sans-serif;scroll-behavior:smooth}html,body{margin:0}
 	animation-timing-function: cubic-bezier(0.76, 0, 0.24, 1);
 	animation-fill-mode: both;
 	animation-name: astroFadeIn; }</style></head> <body> <header id="header" data-astro-cid-hnhh3bfe> <div class="header-content" data-astro-cid-hnhh3bfe> <div class="logo" data-astro-cid-hnhh3bfe> <a href="/" data-astro-cid-hnhh3bfe> <img src="/_astro/logo-extended.DdMplc16_1UQgzK.svg" alt="logo casaedile" width="145" height="38" loading="lazy" decoding="async"> </a> </div> <nav class="services" data-astro-cid-hnhh3bfe> <a href="/services/imbiancatura-tinteggiatura" data-astro-cid-hnhh3bfe>Imbiancatura</a><a href="/services/traslochi" data-astro-cid-hnhh3bfe>Traslochi</a><a href="/services/montaggio" data-astro-cid-hnhh3bfe>Montaggio</a><a href="/services/servizi-professionali" data-astro-cid-hnhh3bfe>Servizi professionali</a> </nav> <div class="call-to-action" data-astro-cid-hnhh3bfe> <a href="/contacts" data-astro-cid-hnhh3bfe> <button class="btn" data-astro-cid-hnhh3bfe> <span data-astro-cid-hnhh3bfe> Contattaci </span> </button> </a> </div> <button class="menu-button" id="menuButton" data-astro-cid-hnhh3bfe> &#9776; </button> </div> </header> <div class="drawer" id="drawer" data-astro-cid-hnhh3bfe> <div id="drawer-content" data-astro-cid-hnhh3bfe> <div id="drawer-header" data-astro-cid-hnhh3bfe> <button id="close-menu-button" data-astro-cid-hnhh3bfe> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368" data-astro-cid-hnhh3bfe><path d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z" data-astro-cid-hnhh3bfe></path></svg> </button> </div> <div id="drawer-menu" data-astro-cid-hnhh3bfe> <nav class="services" data-astro-cid-hnhh3bfe> <a href="/services/imbiancatura-tinteggiatura" data-astro-cid-hnhh3bfe> <span data-astro-cid-hnhh3bfe> Imbiancatura </span> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368"> <path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path> </svg> </a><a href="/services/traslochi" data-astro-cid-hnhh3bfe> <span data-astro-cid-hnhh3bfe> Traslochi </span> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368"> <path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path> </svg> </a><a href="/services/montaggio" data-astro-cid-hnhh3bfe> <span data-astro-cid-hnhh3bfe> Montaggio </span> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368"> <path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path> </svg> </a><a href="/services/servizi-professionali" data-astro-cid-hnhh3bfe> <span data-astro-cid-hnhh3bfe> Servizi professionali </span> <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#5f6368"> <path d="M522-480 333-669l51-51 240 240-240 240-51-51 189-189Z"></path> </svg> </a> </nav> <div class="call-to-action" data-astro-cid-hnhh3bfe> <div class="btn" data-astro-cid-6ygtcg62 style="--textColor: black;--bgColor: #0000000d;"> <a href="/contacts" data-astro-cid-6ygtcg62 style="--textColor: black;--bgColor: #0000000d;"> Contattaci </a> </div>  </div> </div> </div> </div> <script>
-  let lastScrollY = window.scrollY;
-  const header = document.getElementById("header");
-  const menuButton = document.getElementById("menuButton");
-  const closeMenuButton = document.getElementById("close-menu-button");
-  const drawer = document.getElementById("drawer");
 
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > lastScrollY) {
-      header.classList.add("header-hidden");
-    } else {
-      header.classList.remove("header-hidden");
-    }
-
-    if (window.scrollY > 0) {
-      header.classList.add("scrolled");
-    } else {
-      header.classList.remove("scrolled");
-    }
-
-    lastScrollY = window.scrollY;
+  document.addEventListener("DOMContentLoaded", () => {
+    initHeader();
   });
 
-  function toggleDrawer() {
-    drawer.classList.toggle("active");
+  document.addEventListener("astro:after-swap", () => {
+    initHeader();
+  });
 
-    document.body.style.overflow =
-      document.body.style.overflow === "hidden" ? "initial" : "hidden";
+  function initHeader() {
+    let lastScrollY = window.scrollY;
+    const header = document.getElementById("header");
+    const menuButton = document.getElementById("menuButton");
+    const closeMenuButton = document.getElementById("close-menu-button");
+    const drawer = document.getElementById("drawer");
+
+    function handleScroll() {
+      if (window.scrollY > lastScrollY) {
+        header.classList.add("header-hidden");
+      } else {
+        header.classList.remove("header-hidden");
+      }
+
+      if (window.scrollY > 0) {
+        header.classList.add("scrolled");
+      } else {
+        header.classList.remove("scrolled");
+      }
+
+      lastScrollY = window.scrollY;
+    }
+
+    window.addEventListener("scroll", () => {
+      handleScroll();
+    });
+
+    function toggleDrawer() {
+      drawer.classList.toggle("active");
+
+      document.body.style.overflow =
+        document.body.style.overflow === "hidden" ? "initial" : "hidden";
+    }
+
+    closeMenuButton.addEventListener("click", toggleDrawer);
+    menuButton.addEventListener("click", toggleDrawer);
   }
-
-  closeMenuButton.addEventListener("click", toggleDrawer);
-  menuButton.addEventListener("click", toggleDrawer);
 </script>  <div id="hero"> <div id="hero-content"> <h1>Traslochi rapidi e veloci a Milano e in Lombardia</h1> </div> <img src="/_astro/moving-1.DsKIWTM7_jCA7z.webp" alt="Traslochi a Milano - Furgone durante un trasloco" class="hero-img" data-astro-transition-scope="astro-ma67dsdk-1" width="5898" height="3932" loading="lazy" decoding="async"> </div> <div id="content-container">  <div class="alternate-layout"> <img src="/_astro/moving-2.DGxb6MyU_2gmLfd.webp" alt="image on the left" width="6000" height="4000" loading="lazy" decoding="async"><div class="paragraph"><h2 id="servizi-di-traslochi-a-milano-bergamo-monza-e-lombardia">Servizi di traslochi a Milano, Bergamo, Monza e Lombardia</h2><p>Organizza il tuo trasloco senza stress con il nostro servizio di traslochi a Milano, Bergamo, Monza e in tutta la Lombardia. Offriamo soluzioni personalizzate per privati e aziende, garantendo sicurezza e professionalità. Grazie a mezzi moderni e personale qualificato, gestiamo ogni fase del trasloco, dal ritiro al montaggio finale.
 Che tu debba spostarti in città o trasferirti fuori regione, siamo qui per aiutarti. Richiedi subito un preventivo gratuito e scopri come possiamo semplificare il tuo trasloco.</p></div><div class="paragraph"><h2 id="traslochi-per-privati-e-aziende">Traslochi per privati e aziende</h2><p>Il nostro servizio di traslochi è pensato per soddisfare le esigenze sia di privati che di aziende. Offriamo soluzioni su misura per case, appartamenti, uffici e negozi, curando ogni dettaglio per garantire un trasloco rapido, sicuro e senza imprevisti. Dalla pianificazione iniziale fino al montaggio finale, il nostro team di esperti lavora con precisione e attenzione per proteggere mobili, oggetti fragili e apparecchiature delicate. Affidati a noi per un servizio affidabile e puntuale, progettato per minimizzare i tempi di fermo e massimizzare la tua soddisfazione.</p></div><img src="/_astro/moving.Bxq9jmpY_1NpJ4R.webp" alt="image on the left" width="6144" height="3456" loading="lazy" decoding="async"><img src="/_astro/moving-3.uSSn-Ay6_Z1kKapt.webp" alt="image on the left" width="3936" height="2624" loading="lazy" decoding="async"><div class="paragraph"><h3 id="preventivi-traslochi-a-milano-e-dintorni">Preventivi traslochi a Milano e dintorni</h3><p>Cerchi un trasloco a Milano e nelle aree circostanti? Offriamo preventivi chiari e senza sorprese per traslochi in tutta la Lombardia. Dopo un sopralluogo accurato, elaboriamo una proposta personalizzata in base alle tue esigenze e al volume di oggetti da trasportare. I nostri preventivi includono tutti i servizi necessari: smontaggio, imballaggio, trasporto e rimontaggio. Siamo disponibili per traslochi urgenti o pianificati con largo anticipo, garantendo sempre massima trasparenza e professionalità. Contattaci oggi per ottenere un preventivo gratuito e iniziare il tuo trasloco senza stress.</p></div> </div> 
 <div class="contact-layout" id="contactform"> <div class="contacts"> <!-- <div id="contact-bg">
