@@ -1,0 +1,1 @@
+import{g as r,S as t}from"./ScrollTrigger.CKx49QUS.js";r.registerPlugin(t);r.to("#image1",{y:30,ease:"none",scrollTrigger:{trigger:"#image1",start:"top top",end:"bottom top",scrub:!0}});r.to("#image2",{y:30,ease:"none",scrollTrigger:{trigger:"#image2",start:"-=150 top",end:"bottom top",scrub:!0}});
