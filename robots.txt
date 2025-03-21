@@ -1,5 +1,5 @@
 
 User-agent: *
-Allow: /
+Disallow: /
 
 Sitemap: https://madonnadifonti.it/sitemap-index.xml
